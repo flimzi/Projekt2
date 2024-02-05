@@ -170,7 +170,10 @@ namespace Projekt
 
             var drugActivity = carer.ScheduleDrugs(patient, schedule, deadline, repeat);
 
-            while (new ModelMenu<Drug>(Manager.Drugs).ShowAndGetValue() is Drug drug)
+            //while (new ModelMenu<Drug>(Manager.Drugs).ShowAndGetValue() is Drug drug)
+            //    drugActivity.AddDrug(drug, drug.GetAmount());
+
+            if (new ModelMenu<Drug>(Manager.Drugs).ShowAndGetValue() is Drug drug)
                 drugActivity.AddDrug(drug, drug.GetAmount());
 
             return default;

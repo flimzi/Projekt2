@@ -214,9 +214,12 @@ namespace Projekt
     {
         public T? Value { get; protected set; }
 
+        public bool Proceed { get; }
+
         public ValueMenu(IEnumerable<(string, T)> values, Menu? next = null)
         {
-            Required = true; // workaround
+            //Required = true; // workaround
+            Proceed = next is not null; // workaround!!
 
             foreach (var (label, value) in values)
                 Add(label, Select(value), next);
@@ -227,7 +230,7 @@ namespace Projekt
             return () =>
             {
                 Value = value;
-                return Token.Return;
+                return Proceed ? Token.Proceed : Token.Return;
             };
         }
 

@@ -29,6 +29,8 @@ namespace Projekt
             //    Console.WriteLine($"wybrano {dtInput.DateTime}");
             //else
             //    Console.WriteLine("nie wybrano");
+
+            App.Run();
         }
     }
 }
