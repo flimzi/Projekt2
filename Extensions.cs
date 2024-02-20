@@ -1,6 +1,7 @@
 ﻿using Projekt;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -80,6 +81,22 @@ namespace Projekt
 
                 yield return item;
             }
+        }
+
+        public static TAccumulate IndexAggregate<TSource, TAccumulate>(this IEnumerable<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, int, TAccumulate> func)
+        {
+            return source.Select((item, idx) => (item, idx)).Aggregate(seed, (a, b) => func(a, b.item, b.idx));
+        }
+
+        public static bool TryGetElementAt<T>(this IEnumerable<T> source, int index, out T? element)
+        {
+            element = default;
+
+            if (source.ElementAtOrDefault(index) is not T selectedElement)
+                return false;
+
+            element = selectedElement;
+            return true;
         }
     }
 

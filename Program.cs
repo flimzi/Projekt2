@@ -30,7 +30,15 @@ namespace Projekt
             //else
             //    Console.WriteLine("nie wybrano");
 
-            App.Run();
+            //App.Run();
+            var x = new LoginInput();
+
+            x.Get();
+            
+            if (x.Value is (string email, string password))
+                Console.WriteLine($"email: {email}, password: {password}");
+
+            var d = new SelectInput<int>();
         }
     }
 }

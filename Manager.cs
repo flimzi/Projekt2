@@ -14,13 +14,12 @@ namespace Projekt
 {
     internal interface ILabel
     {
-        string GetLabel();
+        virtual string GetLabel() => ToString() ?? string.Empty;
     }
 
     internal abstract class Model : ILabel
     {
         public Guid Id { get; init; } = Guid.NewGuid();
-        public virtual string GetLabel() => string.Empty;
     }
 
     internal static class Manager

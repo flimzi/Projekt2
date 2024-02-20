@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
-    internal class ConsoleDateTimeInput(DateTime? dateTime = null) : IEnumerable<ConsoleDateTimeInput.DateTimeSegment>
+    internal class ConsoleDateTimeInput(DateTime? dateTime = null, bool required = false) : IEnumerable<ConsoleDateTimeInput.DateTimeSegment>
     {
         internal class DateTimeSegment(string formatString)
         {
@@ -140,6 +140,7 @@ namespace Projekt
 
         protected CursorLinkedList<DateTimeSegment> Segments { get; } = new();
         public DateTime DateTime { get; protected set; } = dateTime ?? DateTime.Now;
+        public bool Required { get; } = required;
 
         public override string ToString()
         {
@@ -164,7 +165,6 @@ namespace Projekt
             }
         }
 
-        // zmien DateTime tylko przy 
         public bool Run()
         {
             var blink = false;
@@ -197,7 +197,7 @@ namespace Projekt
                         case ConsoleKey.Enter:
                             DateTime = dateTime;
                             return true;
-                        case ConsoleKey.Escape:
+                        case ConsoleKey.Escape when !Required:
                             Console.WriteLine();
                             return false;
                     }

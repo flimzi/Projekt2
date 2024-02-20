@@ -24,7 +24,7 @@ namespace Projekt
         public Units Unit { get; init; }
         public string Label { get; init; } = string.Empty;
 
-        public override string GetLabel()
+        public string GetLabel()
         {
             return Label;
         }
